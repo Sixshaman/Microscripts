@@ -1,0 +1,20 @@
+[Common] Cook dinner
+[Common] Do chores
+[Common] Buy groceries
+
+[Work] Finish task #4986
+[Work] Finish task #4995
+[Work] Finish task #5001
+[Work] Code review on task #4967
+[Work] Code review on task #4980
+
+[Math book] Exercise 5.1
+[Math book] Exercise 5.2
+[Math book] Exercise 5.3
+[Math book] Exercise 5.4
+
+[Workouts] Cardio
+[Workouts] Strength training
+
+[Pet project] Fix the bug with broken interface
+[Pet project] Commit and push
