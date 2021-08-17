@@ -69,16 +69,16 @@ def print_split_objectives_with_remove(flat_objectives, type_to_remove):
         if objective[0] == type_to_remove:
             continue
 
-        print(objective)
+        print(objective[1])
 
-def print_united_objectives_with_extract(objectives, type_to_extract):
-    if type_to_extract in objectives.keys():
-        for objective in objectives[type_to_extract]:
-            print(objective)
+def print_united_objectives_with_extract(flat_objectives, type_to_extract):
+    for objective in flat_objectives:
+        if objective[0] == type_to_extract:
+            print(objective[1])
 
-        objectives.pop(type_to_extract)
-
-    print_united_objectives(objectives)
+    for objective in flat_objectives:
+        if objective[0] != type_to_extract:
+            print(objective[1])
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -92,16 +92,14 @@ if __name__ == "__main__":
             elif sys.argv[2] == "--split":
                 mode = Mode.SPLIT
             elif sys.argv[2] == "--remove" or sys.argv[2] == "--extract":
-                if len(sys.argv) < 4:
-                    raise ValueError("Please provide objective type")
-                else:
+                if len(sys.argv) > 3:
                     type_param = sys.argv[3]
 
-                    if sys.argv[2] == "--remove":
-                        mode = Mode.REMOVE
+                if sys.argv[2] == "--remove":
+                    mode = Mode.REMOVE
 
-                    if sys.argv[2] == "--extract":
-                        mode = Mode.EXTRACT
+                if sys.argv[2] == "--extract":
+                    mode = Mode.EXTRACT
 
         filename = sys.argv[1]
 
@@ -120,6 +118,10 @@ if __name__ == "__main__":
 
                     flat_objectives.append((objective_type, found_groups[0]))
 
+        #Select a random type if none provided
+        if len(type_param) == 0:
+            type_param = random.choice(list(objectives.keys()))
+
         if mode == Mode.UNITE:
             print_united_objectives(objectives)
 
@@ -130,4 +132,4 @@ if __name__ == "__main__":
             print_split_objectives_with_remove(flat_objectives, type_param)
 
         elif mode == Mode.EXTRACT:
-            print_united_objectives_with_extract(objectives, type_param)
+            print_united_objectives_with_extract(flat_objectives, type_param)
